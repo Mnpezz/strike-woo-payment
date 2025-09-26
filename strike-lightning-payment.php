@@ -3,7 +3,7 @@
  * Plugin Name: Strike Lightning Payment Gateway
  * Plugin URI: https://github.com/mnpezz/strike-woo-payment
  * Description: Accept Bitcoin Lightning Network payments via Strike API for WooCommerce
- * Version: 2.1.1
+ * Version: 2.1.2
  * Author: mnpezz
  * License: GPL v2 or later
  * Text Domain: strike-lightning-payment
@@ -125,9 +125,7 @@ function strike_lightning_ajax_check_payment() {
     }
     
     // Check if order is already paid
-    error_log('Strike Payment Check - Order ' . $order_id . ' status: ' . $order->get_status() . ', is_paid: ' . ($order->is_paid() ? 'Yes' : 'No'));
     if ($order->is_paid()) {
-        error_log('Strike Payment Check - Order ' . $order_id . ' already paid, returning success');
         wp_send_json_success(array('paid' => true));
         return;
     }
@@ -224,46 +222,6 @@ function strike_lightning_ajax_check_payment() {
                 }
             }
             
-            // TEMPORARY DEBUG: If we have any receives at all, let's see if we should treat them as paid
-            // This is just for debugging - remove this in production
-            if (is_array($receives_list) && count($receives_list) > 0) {
-                error_log('Strike Payment - DEBUG: Found ' . count($receives_list) . ' receives, considering if any should count as paid');
-                
-                // Check if any receive has a positive amount - this might indicate payment was received
-                $found_completed = false;
-                foreach ($receives_list as $receive) {
-                    if (isset($receive['amount']) && is_array($receive['amount']) && isset($receive['amount']['amount'])) {
-                        $amount = floatval($receive['amount']['amount']);
-                        if ($amount > 0) {
-                            error_log('Strike Payment - DEBUG: Found receive with amount: ' . $amount . ', state: ' . (isset($receive['state']) ? $receive['state'] : 'UNKNOWN'));
-                            
-                            // Based on Strike docs, if we have a receive with an amount > 0, payment might be complete
-                            // Let's temporarily accept this as payment completion for testing
-                            if ($amount > 0) {
-                                error_log('Strike Payment - TEMP FIX: Treating receive with amount > 0 as completed payment');
-                                $found_completed = true;
-                            }
-                        }
-                    }
-                }
-                
-                // TEMPORARY: Accept payment if we found any receives with amounts
-                if ($found_completed) {
-                    error_log('Strike Payment - TEMP: Marking order as paid based on receives with amounts');
-                    $order->payment_complete();
-                    $order->add_order_note(__('Lightning payment completed via Strike (temporary logic)', 'strike-lightning-payment'));
-                    
-                    // Clear the cart
-                    if (WC()->cart) {
-                        WC()->cart->empty_cart();
-                    }
-                    
-                    wp_send_json_success(array('paid' => true));
-                    return;
-                }
-            } else if (!is_array($receives_response['data'])) {
-                error_log('Strike Payment - ERROR: receives_response data is not an array, might be an API error');
-            }
             
             // Create debug info for the frontend
             $debug_info = array();
