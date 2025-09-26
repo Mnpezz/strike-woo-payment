@@ -87,14 +87,6 @@ class WC_Gateway_Strike_Lightning extends WC_Payment_Gateway {
                 ),
                 'desc_tip' => true,
             ),
-            'webhook_info' => array(
-                'title' => __('Webhook URL', 'strike-lightning-payment'),
-                'type' => 'title',
-                'description' => sprintf(
-                    __('Configure this webhook URL in your Strike dashboard:<br><code>%s</code><br>Subscribe to events: <strong>receive-request.receive-pending</strong> and <strong>receive-request.receive-completed</strong>', 'strike-lightning-payment'),
-                    home_url('/wc-api/strike_lightning_webhook')
-                ),
-            ),
         );
     }
     
