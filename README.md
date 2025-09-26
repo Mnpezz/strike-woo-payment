@@ -51,8 +51,6 @@ A WordPress plugin that enables Bitcoin Lightning Network payments via the Strik
 3. **Webhook URL**: Copy this URL to your Strike webhook settings (optional)
 4. **Debug Tools**: Use the built-in debug interface to test API connectivity
 
-**Debug Tools Location**: WordPress Admin → Settings → Strike Lightning
-
 ### WooCommerce Settings
 
 1. Go to WooCommerce > Settings > Payments
