@@ -22,7 +22,7 @@ All notable changes to the Strike Lightning Payment Gateway for WooCommerce will
 - Documented required API scopes
 - Added debug tools usage instructions
 
-## [2.0.x] - 2024
+## [2.0.x] - 2025
 
 ### 🚀 Major Refactor
 - **Strike API v1 compatibility** - Complete rewrite for Strike's modern API
