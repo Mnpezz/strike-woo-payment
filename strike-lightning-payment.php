@@ -3,7 +3,7 @@
  * Plugin Name: Strike Lightning Payment Gateway
  * Plugin URI: https://github.com/mnpezz/strike-woo-payment
  * Description: Accept Bitcoin Lightning Network payments via Strike API for WooCommerce
- * Version: 2.2.0
+ * Version: 2.2.1
  * Author: mnpezz
  * License: GPL v2 or later
  * Text Domain: strike-lightning-payment
