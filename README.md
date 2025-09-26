@@ -82,6 +82,8 @@ A WordPress plugin that enables Bitcoin Lightning Network payments via the Strik
 ## Supported Lightning Wallets
 
 - Strike (iOS/Android)
+- Coinos.io
+- Aqua Wallet
 - Phoenix Wallet
 - Breez Wallet
 - BlueWallet
