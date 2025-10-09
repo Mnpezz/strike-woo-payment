@@ -183,6 +183,11 @@ For Strike API support:
 - Webhook support
 - Admin dashboard
 
+## Related Plugins:
+
+* [Payment with Coinos](https://github.com/Mnpezz/coinos-woo-payment)
+* [Lightning Rewards with Coinos](https://github.com/Mnpezz/coinos-wordpress-rewards)
+
 ## License
 
 This plugin is licensed under the GPL v2 or later.
