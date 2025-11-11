@@ -19,19 +19,19 @@ final class WC_Strike_Lightning_Gateway_Blocks_Support extends AbstractPaymentMe
     public function get_payment_method_script_handles() {
         wp_register_script(
             'wc-strike-lightning-blocks-integration',
-            plugins_url('assets/js/blocks.js', dirname(__FILE__)),
-            [
+            STRIKE_LIGHTNING_PLUGIN_URL . 'assets/js/blocks.js',  // Match Coinos pattern
+            array(
                 'wc-blocks-registry',
                 'wc-settings',
                 'wp-element',
                 'wp-html-entities',
                 'wp-i18n',
-            ],
+            ),
             STRIKE_LIGHTNING_VERSION,
             true
         );
         
-        return ['wc-strike-lightning-blocks-integration'];
+        return array('wc-strike-lightning-blocks-integration');
     }
 
     public function get_payment_method_data() {
