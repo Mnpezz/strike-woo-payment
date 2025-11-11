@@ -62,6 +62,23 @@ function strike_lightning_register_payment_method_type() {
     );
 }
 
+// Pass payment method data to frontend
+add_filter('woocommerce_blocks_payment_method_data_registration', 'strike_lightning_add_payment_method_data');
+
+function strike_lightning_add_payment_method_data($payment_method_data) {
+    $gateway_settings = get_option('woocommerce_strike_lightning_settings', array());
+    
+    if (!empty($gateway_settings['enabled']) && $gateway_settings['enabled'] === 'yes') {
+        $payment_method_data['strike_lightning_data'] = array(
+            'title' => isset($gateway_settings['title']) ? $gateway_settings['title'] : 'Bitcoin Lightning Payment',
+            'description' => isset($gateway_settings['description']) ? $gateway_settings['description'] : 'Pay with Bitcoin Lightning Network via Strike',
+            'icon' => STRIKE_LIGHTNING_PLUGIN_URL . 'assets/images/lightning-icon.svg',
+            'supports' => array('products'),
+        );
+    }
+    
+    return $payment_method_data;
+}
 // Declare compatibility
 add_action('before_woocommerce_init', 'strike_lightning_cart_checkout_blocks_compatibility');
 function strike_lightning_cart_checkout_blocks_compatibility() {
